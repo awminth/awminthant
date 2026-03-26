@@ -70,12 +70,14 @@ GitHub Pages only serves **static files**. It does **not** run Vite. If you push
 1. Push this repo including `.github/workflows/deploy-github-pages.yml`.
 2. On GitHub: **Settings → Pages → Build and deployment**.
 3. Set **Source** to **GitHub Actions** (not “Deploy from a branch” with only source files).
-4. Push to `main` or `master`; the **Deploy to GitHub Pages** workflow runs `npm ci` and `npm run build`, then publishes **`dist/`**.
+4. Push to **`main`**; the **Deploy to GitHub Pages** workflow runs `npm ci` and `npm run build`, then publishes **`dist/`**.
 
-`vite.config.ts` sets **`base`** automatically in CI:
+`vite.config.ts` sets **`base`** automatically in CI (on GitHub Actions only):
 
-- Repo named `yourname.github.io` → `base: '/'` (site at `https://yourname.github.io/`).
-- Any other repo (e.g. `portfolio`) → `base: '/portfolio/'` (site at `https://yourname.github.io/portfolio/`).
+- Repo named **`yourname.github.io`** → `base: '/'` → site at `https://yourname.github.io/`
+- Normal repo, e.g. **`awminth/awminthant`** → `base: '/awminthant/'` → site at **`https://awminth.github.io/awminthant/`**
+
+**Important:** If the repo is **not** `username.github.io`, the live site is **never** at `https://username.github.io/` alone — you must open **`https://username.github.io/<repo-name>/`** (trailing path). Opening the user root URL without the repo name often causes missing assets or wrong `index.html` behavior.
 
 **Manual deploy:** run `npm run build` locally, then upload the **contents** of the `dist/` folder to your Pages branch or hosting root — not the `src/` folder.
 
