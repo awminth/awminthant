@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
+  ExternalLink,
   Instagram,
   Linkedin,
   Mail,
@@ -26,6 +27,9 @@ const CONTACT = {
 const YOUR_NAME = 'Aw Min Thant';
 const BRAND = 'Aw Min Thant';
 
+const BASE_URL = import.meta.env.BASE_URL;
+const assetUrl = (p: string) => `${BASE_URL}${p.replace(/^\/+/, '')}`;
+
 const SECTION_IDS = [
   'home',
   'services',
@@ -42,6 +46,30 @@ const NAV_ITEMS: { id: SectionId; label: string }[] = [
   { id: 'portfolio', label: 'Portfolio' },
   { id: 'contact', label: 'Contact me' },
 ];
+
+const PORTFOLIO_PROJECTS = [
+  {
+    title: 'Hotel Management System',
+    desc: 'Hotel operations and booking workflow — live demo.',
+    url: 'https://hotel.brightwareitsolutions.site/',
+    image: assetUrl('portfolio-hotel.jpg'),
+    imageAlt: 'Hotel Management System preview image',
+  },
+  {
+    title: 'POS Management System',
+    desc: 'Point-of-sale and retail workflow — live environment.',
+    url: 'https://pos.brightwareitsolutions.site/',
+    image: assetUrl('portfolio-pos.jpg'),
+    imageAlt: 'POS Management System preview image',
+  },
+  {
+    title: 'School Management System',
+    desc: 'School admin portal — BRIGHTWARE SMS login.',
+    url: 'https://sms.brightwareitsolutions.site/#/login',
+    image: assetUrl('portfolio-school.jpg'),
+    imageAlt: 'School Management System preview image',
+  },
+] as const;
 
 /**
  * Must match section `scroll-mt-24` (6rem = 96px). If you change scroll-mt,
@@ -337,7 +365,7 @@ export default function App() {
                   Hire Me
                 </a>
                 <a
-                  href="/resume.pdf"
+                  href={assetUrl('resume.pdf')}
                   download="resume.pdf"
                   className="inline-flex items-center justify-center rounded-md border border-[#444444] px-8 py-3 text-sm font-medium text-neutral-400 transition-colors hover:border-neutral-300 hover:text-white"
                 >
@@ -372,7 +400,7 @@ export default function App() {
             <div className="order-1 flex justify-center lg:order-2 lg:justify-end">
               <div className="aspect-square w-full max-w-[min(100%,380px)] shrink-0 overflow-hidden rounded-full border border-[#2a2a2a] bg-[#1a1a1a] sm:max-w-[min(100%,450px)] lg:max-w-[min(100%,520px)] xl:max-w-[min(100%,560px)]">
                 <img
-                  src="/profile.png"
+                  src={assetUrl('profile.png')}
                   alt={`${YOUR_NAME} — portrait`}
                   className="h-full w-full object-cover object-[center_30%]"
                 />
@@ -503,33 +531,53 @@ export default function App() {
               Portfolio
             </h2>
             <p className="mx-auto mb-12 max-w-2xl text-center text-neutral-400">
-              A few sample projects. Replace the titles, text, and links below
-              with your own work when you are ready.
+              Selected projects — click a card to open the live site.
             </p>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {[
-                {
-                  title: 'Hotel Management System',
-                  desc: 'Short note: e.g. Flutter or React app for a client.',
-                },
-                {
-                  title: 'POS Management System',
-                  desc: 'Short note: e.g. Node.js API or backend service.',
-                },
-                {
-                  title: 'School Management System',
-                  desc: 'Short note: e.g. AI agent or automation.',
-                },
-              ].map((p) => (
+              {PORTFOLIO_PROJECTS.map((p) => (
                 <article
                   key={p.title}
-                  className="group rounded-xl border border-[#2a2a2a] bg-[#161616] p-6 transition-all hover:border-[#ff6b00]/50"
+                  className="group flex flex-col overflow-hidden rounded-xl border border-[#2a2a2a] bg-[#161616] transition-all hover:border-[#ff6b00]/50 hover:shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
                 >
-                  <div className="mb-4 aspect-video rounded-lg bg-[#222]" />
-                  <h3 className="mb-2 font-semibold text-white group-hover:text-[#ff6b00]">
-                    {p.title}
-                  </h3>
-                  <p className="text-sm text-neutral-400">{p.desc}</p>
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative block aspect-video overflow-hidden bg-[#222] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff6b00]"
+                    aria-label={`Open ${p.title} live site`}
+                  >
+                    <img
+                      src={p.image}
+                      alt={p.imageAlt}
+                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-90" />
+                  </a>
+                  <div className="flex flex-1 flex-col p-6">
+                    <h3 className="mb-2 text-lg font-semibold leading-snug">
+                      <a
+                        href={p.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white transition-colors hover:text-[#ff6b00] focus-visible:rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff6b00]"
+                      >
+                        {p.title}
+                      </a>
+                    </h3>
+                    <p className="mb-4 flex-1 text-sm leading-relaxed text-neutral-400">
+                      {p.desc}
+                    </p>
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#ff6b00] transition-[gap,color] hover:gap-2.5 hover:text-[#ff8534]"
+                    >
+                      Visit live site
+                      <ExternalLink size={16} className="shrink-0" aria-hidden />
+                    </a>
+                  </div>
                 </article>
               ))}
             </div>
