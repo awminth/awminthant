@@ -27,6 +27,10 @@ const CONTACT = {
 const YOUR_NAME = 'Aw Min Thant';
 const BRAND = 'Aw Min Thant';
 
+/** Random-looking filenames so repo/tree and URLs are not obviously "profile" / "resume". Use a private GitHub repo if you do not want these in a public codebase. */
+const PROFILE_IMAGE_SRC = `${import.meta.env.BASE_URL}x9k2m7f4q8nb.png`;
+const RESUME_ASSET_URL = `${import.meta.env.BASE_URL}z3p8w1r6yk4v.pdf`;
+
 const SECTION_IDS = [
   'home',
   'services',
@@ -362,8 +366,8 @@ export default function App() {
                   Hire Me
                 </a>
                 <a
-                  href="/resume.pdf"
-                  download="resume.pdf"
+                  href={RESUME_ASSET_URL}
+                  download="Aw_Min_Thant_Resume.pdf"
                   className="inline-flex items-center justify-center rounded-md border border-[#444444] px-8 py-3 text-sm font-medium text-neutral-400 transition-colors hover:border-neutral-300 hover:text-white"
                 >
                   Download CV
@@ -397,7 +401,7 @@ export default function App() {
             <div className="order-1 flex justify-center lg:order-2 lg:justify-end">
               <div className="aspect-square w-full max-w-[min(100%,380px)] shrink-0 overflow-hidden rounded-full border border-[#2a2a2a] bg-[#1a1a1a] sm:max-w-[min(100%,450px)] lg:max-w-[min(100%,520px)] xl:max-w-[min(100%,560px)]">
                 <img
-                  src="/profile.png"
+                  src={PROFILE_IMAGE_SRC}
                   alt={`${YOUR_NAME} — portrait`}
                   className="h-full w-full object-cover object-[center_30%]"
                 />
