@@ -1,40 +1,20 @@
-# Aw Min Thant — Portfolio
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-React + Vite + Tailwind portfolio. Live deploy via **GitHub Pages** (see below).
+# Run and deploy your AI Studio app
 
-## Local
+This contains everything you need to run your app locally.
 
-```bash
-npm install
-npm run dev
-```
+View your app in AI Studio: https://ai.studio/apps/a6214e2a-1199-4815-a4f5-4251e38b9f31
 
-Build: `npm run build` · Preview: `npm run preview`
+## Run Locally
 
-## GitHub + deploy (first time)
+**Prerequisites:**  Node.js
 
-1. On [github.com/new](https://github.com/new), create a repository (e.g. `portfolio`). **Do not** add a README (this repo already has one).
-2. In this folder:
 
-```bash
-git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO.git
-git push -u origin main
-```
-
-3. In the repo on GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-4. Open **Actions** — the workflow **Deploy to GitHub Pages** runs on every push to `main`. When it finishes, the site is at:
-
-`https://YOUR_USERNAME.github.io/YOUR_REPO/`
-
-The build uses base path `/<repo-name>/` automatically so assets load correctly.
-
-## Profile photo & CV (privacy)
-
-Your portrait and CV live in `public/` under **non-obvious filenames** (`x9k2m7f4q8nb.png`, `z3p8w1r6yk4v.pdf`) so the GitHub file tree does not shout `profile.png` / `resume.pdf`. The site still loads and downloads them correctly (`Download CV` saves as `Aw_Min_Thant_Resume.pdf`).
-
-- To keep these files out of a **public** GitHub repo listing, use a **private** repository (GitHub still deploys Pages; your live site URLs can still be opened by anyone who knows the link—same as any public website).
-- To replace them: drop new files on top of those two paths (same names) or change the names in `src/App.tsx` (`PROFILE_IMAGE_SRC` / `RESUME_ASSET_URL`).
-
-## Optional: Gemini
-
-If you use features that need it, copy `.env.example` to `.env` and set `GEMINI_API_KEY`.
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
