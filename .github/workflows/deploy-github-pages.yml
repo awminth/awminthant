@@ -1,0 +1,56 @@
+# Deploys the Vite build to GitHub Pages when you push to `main`.
+#
+# After first push:
+# 1. Repo → Settings → Pages → Build and deployment → Source: "GitHub Actions"
+# 2. Site URL: https://<your-username>.github.io/<repo-name>/
+#
+# If your repo is named <username>.github.io (user site at root), set secret
+# BASE_PATH to "/" and change vite base logic, or use a project repo instead.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install and build
+        env:
+          GITHUB_PAGES: 'true'
+        run: |
+          npm ci
+          npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
