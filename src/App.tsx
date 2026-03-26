@@ -1,15 +1,14 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
-  Bot,
-  Code2,
-  ExternalLink,
   Instagram,
   Linkedin,
   Mail,
   Menu,
   Phone,
-  Server,
   Smartphone,
+  Server,
+  Bot,
+  Code2,
   X,
 } from 'lucide-react';
 
@@ -43,30 +42,6 @@ const NAV_ITEMS: { id: SectionId; label: string }[] = [
   { id: 'portfolio', label: 'Portfolio' },
   { id: 'contact', label: 'Contact me' },
 ];
-
-const PORTFOLIO_PROJECTS = [
-  {
-    title: 'Hotel Management System',
-    desc: 'Web app for bookings, rooms, and hotel operations — live demo by Brightware.',
-    url: 'https://hotel.brightwareitsolutions.site/',
-    image: '/portfolio-hotel.jpg',
-    imageAlt: 'Hotel lobby and pool — Hotel Management System preview',
-  },
-  {
-    title: 'POS Management System',
-    desc: 'Point-of-sale and retail workflow — Brightware POS live environment.',
-    url: 'https://pos.brightwareitsolutions.site/',
-    image: '/portfolio-pos.jpg',
-    imageAlt: 'Retail checkout — POS Management System preview',
-  },
-  {
-    title: 'School Management System',
-    desc: 'Student, class, and school admin tools — BRIGHTWARE SMS portal.',
-    url: 'https://sms.brightwareitsolutions.site/#/login',
-    image: '/portfolio-school.jpg',
-    imageAlt: 'Students learning — School Management System preview',
-  },
-] as const;
 
 /**
  * Must match section `scroll-mt-24` (6rem = 96px). If you change scroll-mt,
@@ -528,54 +503,33 @@ export default function App() {
               Portfolio
             </h2>
             <p className="mx-auto mb-12 max-w-2xl text-center text-neutral-400">
-              Live products built for Brightware IT Solutions — click a project
-              to open the site in a new tab.
+              A few sample projects. Replace the titles, text, and links below
+              with your own work when you are ready.
             </p>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-              {PORTFOLIO_PROJECTS.map((p) => (
+              {[
+                {
+                  title: 'Hotel Management System',
+                  desc: 'Short note: e.g. Flutter or React app for a client.',
+                },
+                {
+                  title: 'POS Management System',
+                  desc: 'Short note: e.g. Node.js API or backend service.',
+                },
+                {
+                  title: 'School Management System',
+                  desc: 'Short note: e.g. AI agent or automation.',
+                },
+              ].map((p) => (
                 <article
                   key={p.title}
-                  className="group flex flex-col overflow-hidden rounded-xl border border-[#2a2a2a] bg-[#161616] transition-all hover:border-[#ff6b00]/50 hover:shadow-[0_12px_40px_rgba(0,0,0,0.35)]"
+                  className="group rounded-xl border border-[#2a2a2a] bg-[#161616] p-6 transition-all hover:border-[#ff6b00]/50"
                 >
-                  <a
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative block aspect-video overflow-hidden bg-[#222] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff6b00]"
-                    aria-label={`Open ${p.title} live site`}
-                  >
-                    <img
-                      src={p.image}
-                      alt={p.imageAlt}
-                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-90" />
-                  </a>
-                  <div className="flex flex-1 flex-col p-6">
-                    <h3 className="mb-2 text-lg font-semibold leading-snug">
-                      <a
-                        href={p.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white transition-colors hover:text-[#ff6b00] focus-visible:rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ff6b00]"
-                      >
-                        {p.title}
-                      </a>
-                    </h3>
-                    <p className="mb-4 flex-1 text-sm leading-relaxed text-neutral-400">
-                      {p.desc}
-                    </p>
-                    <a
-                      href={p.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#ff6b00] transition-[gap,color] hover:gap-2.5 hover:text-[#ff8534]"
-                    >
-                      Visit live site
-                      <ExternalLink size={16} className="shrink-0" aria-hidden />
-                    </a>
-                  </div>
+                  <div className="mb-4 aspect-video rounded-lg bg-[#222]" />
+                  <h3 className="mb-2 font-semibold text-white group-hover:text-[#ff6b00]">
+                    {p.title}
+                  </h3>
+                  <p className="text-sm text-neutral-400">{p.desc}</p>
                 </article>
               ))}
             </div>

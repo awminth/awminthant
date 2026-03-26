@@ -1,20 +1,65 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Developer portfolio (React + Vite + Tailwind)
 
-# Run and deploy your AI Studio app
+Single-page portfolio with sections for hero, services, about, portfolio, and contact. Built with **React 19**, **TypeScript**, **Vite 6**, and **Tailwind CSS v4**.
 
-This contains everything you need to run your app locally.
+## Project layout
 
-View your app in AI Studio: https://ai.studio/apps/a6214e2a-1199-4815-a4f5-4251e38b9f31
+```
+portfolio/
+├── public/                 # Static assets (served at site root)
+│   ├── portfolio-hotel.jpg
+│   ├── portfolio-pos.jpg
+│   ├── portfolio-school.jpg
+│   └── …                   # Add profile.png & resume.pdf here if used by the app
+├── src/
+│   ├── App.tsx             # Main UI and content
+│   ├── main.tsx            # React entry
+│   └── index.css           # Tailwind entry + global styles
+├── dist/                   # Production build output (from npm run build)
+├── node_modules/           # Dependencies (after npm install)
+├── index.html              # HTML shell + fonts
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+├── vite.config.ts          # Vite + React + Tailwind; optional GEMINI_API_KEY inject
+├── metadata.json
+├── .env.example            # Optional env template
+├── .gitignore
+└── README.md
+```
 
-## Run Locally
+## Scripts
 
-**Prerequisites:**  Node.js
+| Command        | Description                          |
+| -------------- | ------------------------------------ |
+| `npm install`  | Install dependencies                 |
+| `npm run dev`  | Dev server (port **3009**, all hosts)|
+| `npm run build`| Production build → `dist/`           |
+| `npm run preview` | Preview the production build    |
+| `npm run lint` | Typecheck (`tsc --noEmit`)          |
+| `npm run clean`| Remove `dist` (Unix-style `rm -rf`)  |
 
+## Run locally
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. **Prerequisites:** Node.js (LTS recommended)
+2. Install: `npm install`
+3. Start: `npm run dev` → open the URL shown in the terminal (e.g. `http://localhost:3009`)
+
+## Optional environment
+
+If you use features that need Gemini (see `@google/genai` in `package.json`), copy `.env.example` to `.env` and set `GEMINI_API_KEY`. The portfolio UI does not require it unless you wire API calls yourself.
+
+## Public assets
+
+The app expects these under **`public/`** (paths are root-relative, e.g. `/profile.png`):
+
+- **`profile.png`** — hero portrait (referenced in `App.tsx`)
+- **`resume.pdf`** — CV download (referenced in `App.tsx`)
+
+Portfolio thumbnails are already included as `portfolio-*.jpg`. Replace or add files as needed; keep filenames in sync with `App.tsx` if you rename them.
+
+## Tech stack
+
+- React 19, TypeScript, Vite 6  
+- Tailwind CSS v4 (`@tailwindcss/vite`)  
+- `lucide-react` icons  
